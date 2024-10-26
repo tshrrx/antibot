@@ -3,9 +3,14 @@
 @tailwind utilities;
 
 /* src/index.css */
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
+} 
 
+.App {
+  overflow: hidden;
+  background-color: #000; 
+  font-family: sans-serif;
+} */
