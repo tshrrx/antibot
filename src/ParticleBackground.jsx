@@ -52,7 +52,7 @@ const ParticleBackground = () => {
         reset(canvas) {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.speed = Math.random() / 5 + 0.1;
+            this.speed = Math.random() / 8 + 0.1;
             this.opacity = 1;
             this.fadeDelay = Math.random() * 600 + 100;
             this.fadeStart = Date.now() + this.fadeDelay;

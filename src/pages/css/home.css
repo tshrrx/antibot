@@ -19,6 +19,14 @@
   box-sizing: border-box;
 }
 
+h1 {
+  font-size: 5rem;
+}
+
+p{
+  font-size: 4rem;
+}
+
 body {
   overflow: hidden;
   background-color: #000; /* Set a dark background for contrast */
