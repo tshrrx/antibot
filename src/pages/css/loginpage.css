@@ -17,9 +17,28 @@
     height: 600px; /* Adjust height as needed */
     border: 2px solid grey; /* Change color and width as desired */
     background-color: grey;
-    opacity: 20%;
+    /* opacity: 20%; */
     display: inline-block;
     border-radius: 10px; 
     }
 
 
+.submitBtn{
+    color: #bad6f7;
+}
+
+.loginForm{
+    animation: animateBtn ease 5s;
+}
+
+@keyframes animateBtn {
+    0% {
+        opacity: 0;
+    }
+    70% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
