@@ -75,11 +75,11 @@ const Home = () => {
 features which describes lognormal parameters like stroke distance, initial time, temporal delay, and impulse response time and number of strokes, AntiBOT intelligently 
 reads user behavior. This in-depth analysis enables precise identification of authentic users in real-time, enhancing security 
 and ensuring a trustworthy user experience by preventing unauthorized bot access.</p>
+        <button className="try-now" onClick={handleClick}>
+          <span className="glow"></span>
+          <span className="try-now-content">Try Now</span>
+        </button>
       </div>
-      <button className="try-now" onClick={handleClick('/loginpage')}>
-        <span className="glow"></span>
-        <span className="try-now-content">Try Now</span>
-      </button>
     </div>
   );
 };

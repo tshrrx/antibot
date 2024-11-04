@@ -552,7 +552,7 @@ p {
 
 .content-section {
     position: absolute;
-    top: 27em;
+    top: 28em;
     z-index: 1112;
     color: #fff;
     width: 100%;
@@ -641,8 +641,8 @@ p {
 }
 
 button.try-now {
-    position: absolute; left: 0; right: 0; top: 70%; margin: auto;
-    width: 8em; height: 2.4em;
+    position: absolute; left: 0; right: 0; top: 85%; margin: auto;
+    width: 12em; height: 3em;
     cursor: pointer;
     border-radius: 20em;
     border: none;
@@ -650,7 +650,6 @@ button.try-now {
     border: 1px solid #c2ccff33;
     opacity: 1;
     padding-top: 0.1em;
-
     background: #121521;
     color: #9dc3f7;
     white-space:nowrap;
