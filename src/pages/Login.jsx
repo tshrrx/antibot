@@ -1,20 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import img1 from "../assets/images/Login/pic-1.jpg";
 import img2 from "../assets/images/Login/pic-2.jpg";
 import img3 from "../assets/images/Login/pic-3.jpg";
 import img4 from "../assets/images/Login/pic-4.jpg";
 import img5 from "../assets/images/Login/pic-5.jpg";
 import img6 from "../assets/images/Login/pic-6.jpg";
-import { useForm } from "react-hook-form";
-import { useState,useEffect} from "react";
-import { ToastContainer} from "react-toastify";
-import { errorMessage,notify } from "../utils/Popup";
 import Captcha from "../components/Captcha/Button/Captcha";
+import ParticleBackground from "../particleBackground/ParticleBackground";
 import { setFlag } from "../redux/slices/captchaSlice";
-import { useNavigate,Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../redux/slices/profileSlice";
-import { setToken } from "../redux/slices/authSlice";
+import { errorMessage, notify } from "../utils/Popup";
 
 const arr = [img1, img2, img3, img4, img5, img6];
 const randomImg = arr[Math.floor(Math.random() * arr.length)];
@@ -71,13 +69,15 @@ const Login = () => {
 
   return (
     <div className="flex justify-center items-cente bg-white">
+      
       <div className="w-[100vw] h-[100vh] flex justify-center items-center">
-  
+      
         <div className="w-[60vw] h-[70vh] border-[4px] shadow-2xl rounded-3xl bg-[#EFF3F6] flex flex-row overflow-hidden max-[600px]:w-[80vw]">
           <div
             className="w-[50%] h-[100%] shadow-2xl max-[800px]:w-[40%] max-[600px]:w-[0%]"
             style={{ background: `url(${randomImg})`, backgroundSize: "cover" }}
           ></div>
+          <ParticleBackground />
           <div className="flex flex-col justify-center items-center w-[50%] h-[100%] max-[800px]:w-[60%] max-[600px]:w-[100%]">
             <h1 className="text-[3rem] font-[Pacifico] m-4 max-[800px]:text-[2rem]">
               Login
