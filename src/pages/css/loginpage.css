@@ -1,0 +1,25 @@
+.LoginPage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    }
+
+.frame {
+    display: flex;
+    justify-content: center;
+    position: absolute; left: 0; right: 0; top: 0; bottom: 0;
+    margin: auto;
+    width: 500px; /* Adjust width as needed */
+    height: 600px; /* Adjust height as needed */
+    border: 2px solid grey; /* Change color and width as desired */
+    background-color: grey;
+    opacity: 20%;
+    display: inline-block;
+    border-radius: 10px; 
+    }
+
+

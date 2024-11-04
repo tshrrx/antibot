@@ -1,8 +1,20 @@
+// Landing page inspired by https://www.authkit.com/ and https://codepen.io/RAFA3L/pen/RwOMEEa
+
+// eslint-disable-next-line no-unused-vars
 import React from "react";
-import ParticleBackground from "../ParticleBackground";
+import { useNavigate } from 'react-router-dom';
+import ParticleBackground from "../particleBackground/ParticleBackground";
 import "./css/home.css";
 
+
 const Home = () => {
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate('/loginpage');
+};
+
   return (
     <div className="App">
       <ParticleBackground />
@@ -51,19 +63,26 @@ const Home = () => {
         <div></div>
       </div>
       <div className="hero-spacer"></div>
-
-      {/* <div className="content-section">
+      <div className="content-section">
         <div className="content-acc">
           <div></div>
           <div></div>
         </div>
-        <p className="subt">Revolutionary by design</p>
-        <h3 className="title">Harness. Empower.<br></br>
-          Unmatched Versatility.</h3>
-        <p className="subp">At the core lies our revolutionary framework, <br></br>ensuring adaptability across all application architectures.</p>
-      </div> */}
+        <p className="subt">What do we do?</p>
+        <h3 className="title">Intelligence. Accuracy.<br></br>
+        Enhanced Security.</h3>
+        <p className="subp">AntiBOT, an innovative solution that differentiates human users from automated bots using mouse dynamics data. By extracting 26 unique 
+features which describes lognormal parameters like stroke distance, initial time, temporal delay, and impulse response time and number of strokes, AntiBOT intelligently 
+reads user behavior. This in-depth analysis enables precise identification of authentic users in real-time, enhancing security 
+and ensuring a trustworthy user experience by preventing unauthorized bot access.</p>
+      </div>
+      <button className="try-now" onClick={handleClick('/loginpage')}>
+        <span className="glow"></span>
+        <span className="try-now-content">Try Now</span>
+      </button>
     </div>
   );
 };
 
 export default Home;
+

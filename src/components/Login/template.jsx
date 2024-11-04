@@ -1,18 +1,17 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import img1 from "../assets/images/Login/pic-1.jpg";
 import img2 from "../assets/images/Login/pic-2.jpg";
 import img3 from "../assets/images/Login/pic-3.jpg";
 import img4 from "../assets/images/Login/pic-4.jpg";
 import img5 from "../assets/images/Login/pic-5.jpg";
 import img6 from "../assets/images/Login/pic-6.jpg";
-import { useForm } from "react-hook-form";
-import { useState,useEffect} from "react";
-import { ToastContainer} from "react-toastify";
-import { errorMessage,notify } from "../utils/Popup";
-import { useNavigate,Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { setUser } from "../redux/slices/profileSlice";
 import { setToken } from "../redux/slices/authSlice";
+import { setUser } from "../redux/slices/profileSlice";
+import { errorMessage, notify } from "../utils/Popup";
 
 const arr = [img1, img2, img3, img4, img5, img6];
 const randomImg = arr[Math.floor(Math.random() * arr.length)];
