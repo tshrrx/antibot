@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addClick, addMouseMovement } from '../../../redux/slices/captchaSlice';
+import Header from '../../Login/Header';
 import Button from './Button';
 import './css/captcha.css';
 
@@ -61,9 +63,11 @@ const Captcha = () => {
 
   const handleClick = () => {
     console.log("Mouse Movements:", mouseMovements.current);
+    // eslint-disable-next-line no-undef
     console.log("Mouse Clicks:", clickPositions.current);
     // sendDataToAPI();
     mouseMovements.current = [];
+    // eslint-disable-next-line no-undef
     clickPositions.current = [];
   };
 

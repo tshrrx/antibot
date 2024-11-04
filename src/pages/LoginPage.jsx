@@ -1,15 +1,15 @@
-// eslint-disable-next-line no-unused-vars
-import React, {useState} from "react";
-import ParticleBackground from "../particleBackground/ParticleBackground";
-import "./css/loginpage.css";
-import { ToastContainer } from "react-toastify";
-import { errorMessage, notify } from "../utils/Popup";
+/* eslint-disable no-unused-vars */
+
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import Header from "../components/Login/Header";
-import { setFlag } from "../redux/slices/captchaSlice";
-import {testData} from "../data/user.js";
-import { useSelector,useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer } from "react-toastify";
 import Captcha from "../components/Captcha/Button/Captcha";
+import Header from "../components/Login/Header";
+import { testData } from "../data/user.js";
+import ParticleBackground from "../particleBackground/ParticleBackground";
+import { errorMessage, notify } from "../utils/Popup";
+import "./css/loginpage.css";
 
 
 const LoginPage = () => {
