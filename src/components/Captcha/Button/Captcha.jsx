@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addClick, addMouseMovement } from '../../../redux/slices/captchaSlice';
 import Button from './Button';
 import './css/captcha.css';
-import { useSelector,useDispatch } from 'react-redux';
-import { addMouseMovement,addClick } from '../../../redux/slices/captchaSlice';
 
 const Captcha = () => {
   const flag=useSelector(state=>state.captcha.flag);
