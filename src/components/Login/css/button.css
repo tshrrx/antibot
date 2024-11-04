@@ -1,0 +1,77 @@
+
+button.btn {
+    position: absolute; left: min(46em, 60vw); right: 0; margin: 0 auto;
+    width: 8em; height: 2.4em;
+    cursor: pointer;
+    border-radius: 20em;
+    border: none;
+    transition: background 0.5s, transform 0.5s;
+    border: 1px solid #c2ccff33;
+    opacity: 1;
+    padding-top: 0.1em;
+
+    background: #121521;
+    color: #9dc3f7;
+    white-space:nowrap;
+}
+button.btn::before {
+    content: ''; display: block; position:absolute; left: 0; top:0; border-radius: 20em;
+    width: 100%; height: 100%;
+    background: #c2ccff91 radial-gradient(farthest-side at 50% 100%, #c2ccff, transparent);
+    opacity: 0.1;
+    transition: all 0.4s ease-in-out;
+}
+button.btn:hover::before {
+    background: #c2ccff1e radial-gradient(farthest-side at 50% 100%, #c2ccff, transparent);
+    opacity: 0.3;
+}
+.btn .glow {
+    --border-width: 1px;
+    --loop-cycle: 24s;
+    position: absolute;
+    inset: calc(var(--border-width)* -1);
+    border-radius: 50px;
+    border: var(--border-width) solid transparent;
+    -webkit-mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+    mask: linear-gradient(transparent, transparent), linear-gradient(white, white);
+    -webkit-mask-clip: padding-box, border-box;
+    mask-clip: padding-box, border-box;
+    -webkit-mask-composite: source-in, xor;
+    mask-composite: intersect;
+    pointer-events: none;
+}
+button.btn:hover .glow {
+    --loop-cycle: 2s;
+}
+.btn .glow::after, .btn .glow::before {
+    content: "";
+    height: 100%;
+    offset-anchor: 100% 50%;
+    background: radial-gradient(circle at 50% 50%, hsla(0, 0%, 100%, 0.75), transparent 50%), radial-gradient(circle at 50% 50%, #c2ccff 50%, transparent);
+    opacity: 0.4;
+    offset-path: rect(0 100% 100% 0 round 33px);
+    position: absolute;
+    display: inline-block;
+    -webkit-animation: loop 4s linear infinite;
+    animation: loop var(--loop-cycle) linear infinite;
+    aspect-ratio: 1 / 1;
+    transition: opacity 1s ease-in-out;
+}
+.btn .glow::before {
+    animation-delay: calc( var(--loop-cycle) / -2 );
+}
+@keyframes loop {
+    100% {
+        offset-distance: 100%;
+    }    
+}
+.btn-content {
+    background: linear-gradient(0deg, #d8ecf8, #98c0ef);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 1.3em;
+    line-height: 142%;
+}
+button.btn:hover .glow::after, button.btn:hover .glow::before {
+    opacity: 0.6;
+}

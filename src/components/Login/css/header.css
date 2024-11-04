@@ -1,0 +1,76 @@
+h2 {
+    font-family: 'Hubot-Sans', sans-serif;
+}
+h2, p {
+    margin: 0; padding: 0;
+}
+h2 a {
+    text-decoration: none;
+    color: unset;
+}
+
+.heading > h2{
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.04s ease-in-out;
+}
+.heading > h2:hover {
+    opacity: 1;
+    text-shadow: 0 2px 16px rgba(174,207,242, 0.6);
+    width: fit-content;
+}
+
+.heading .spotlight {
+    pointer-events: none;
+    transition: filter 1s ease-in-out;
+
+    height: 42em; width: 100%;
+    overflow: hidden;
+}
+.heading .spotlight > div {
+    border-radius: 0 0 50% 50%;
+    top: 3em;
+    width: 30em; height: max(42em, 86vh);
+    background-image: conic-gradient(from 0deg at 50% -5%, transparent 45%, rgba(124, 145, 182, .3) 49%, rgba(124, 145, 182, .5) 50%, rgba(124, 145, 182, .3) 51%, transparent 55%);
+    transform-origin: 50% 0;
+    filter: blur(15px) opacity(0.5);
+    z-index: -1;
+    animation: load 2s ease-in-out forwards, loadrot 2s ease-in-out forwards, spotlight 21s ease-in-out infinite reverse;
+}
+.heading .spotlight > div:nth-child(1){ 
+    rotate: 20deg;
+    animation: load 2s ease-in-out forwards, loadrot 2s ease-in-out forwards, spotlight 17s ease-in-out infinite;
+}
+.heading .spotlight > div:nth-child(2){ 
+    rotate: -20deg;
+    animation: load 2s ease-in-out forwards, loadrot 2s ease-in-out forwards, spotlight 14s ease-in-out infinite;
+}
+
+.heading {
+    display: flex; width: 100%;
+    justify-content: center;
+    color: #bad6f7;
+    padding: 2em;
+    top: 0; left: 0; right: 0; margin: 0 auto;
+
+    opacity: 0;
+    translate: 0 -1em;
+    animation: load 2s ease-in 2s forwards, up 1.4s ease-out 2s forwards;
+}
+.heading > :nth-child(1) {
+    font-size: 1em;
+    width: fit-content;
+}
+.heading > :nth-child(2) {
+    width: fit-content;
+}
+.heading > h2{
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.04s ease-in-out;
+}
+.heading > h2{
+    opacity: 1;
+    text-shadow: 0 2px 16px rgba(174,207,242, 0.6);
+    width: fit-content;
+}

@@ -8,13 +8,13 @@ import "./css/home.css";
 
 
 const Home = () => {
-
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate('/loginpage');
 };
 
+  
   return (
     <div className="App">
       <ParticleBackground />
