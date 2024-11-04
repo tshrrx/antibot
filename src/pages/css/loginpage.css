@@ -27,3 +27,18 @@
     color: #bad6f7;
 }
 
+.loginForm{
+    animation: animateBtn ease 5s;
+}
+
+@keyframes animateBtn {
+    0% {
+        opacity: 0;
+    }
+    70% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}

@@ -6,6 +6,10 @@ import { ToastContainer } from "react-toastify";
 import { errorMessage, notify } from "../utils/Popup";
 import { useForm } from "react-hook-form";
 import Header from "../components/Login/Header";
+import { setFlag } from "../redux/slices/captchaSlice";
+import {testData} from "../data/user.js";
+import { useSelector,useDispatch } from "react-redux";
+import Captcha from "../components/Captcha/Button/Captcha";
 
 
 const LoginPage = () => {
@@ -17,21 +21,11 @@ const LoginPage = () => {
     formState: { errors, isSubmitting },
   } = useForm();
   const [input, setInput] = useState({ email: "", password: "" });
+  const flag = useSelector((state) => state.captcha.flag);
   const [nav,setNav]=useState(false)
+  const dispatch = useDispatch();
 
-  const testData = [
-    { email: "userA", password: "password123" },
-    { email: "userB", password: "securePass456" },
-    { email: "userC", password: "myPass789" },
-    { email: "userD", password: "loginPass001" },
-    { email: "userE", password: "access2023" },
-    { email: "userF", password: "userKey321" },
-    { email: "userG", password: "safeLogin876" },
-    { email: "userH", password: "uniquePass654" },
-    { email: "userI", password: "authCode987" },
-    { email: "userJ", password: "welcome123" },
-  ];
-
+  // checking user credentials 
   const onSubmit = async (data) => {
     const email = data.email;
     const password=data.password;
@@ -55,15 +49,16 @@ const LoginPage = () => {
   return (
     <div className="Page">
         <ParticleBackground />
+        {(flag)?
         <div className="w-[100vw] h-[100vh] flex justify-center items-center">
             <div>
-              <div>
+              <div className="my-[10vh]">
                 <Header content={"Login"}/>
               </div>
               
               <form
               action=""
-              className="flex flex-col max-[800px]:text-[12px]"
+              className="loginForm flex flex-col max-[800px]:text-[12px]"
               onSubmit={handleSubmit(onSubmit)}
             >
               <input
@@ -93,6 +88,11 @@ const LoginPage = () => {
             </div>
             <ToastContainer /> 
         </div>
+        :
+        <div>
+          <Captcha/>
+        </div>
+        }
     </div>
   );
 };
