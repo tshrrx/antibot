@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addClick, addMouseMovement, setFlag } from '../../../redux/slices/captchaSlice';
 import Header from '../../Login/Header';
@@ -11,6 +11,8 @@ const Captcha = () => {
   var mouseMovements = useSelector(state => state.captcha.mouseMovements);
   const dispatch = useDispatch();
   const result = useSelector(state => state.captcha.result);
+
+  const [click,setClicked]=useState(false);
 
   useEffect(() => {
     const handleMouseMove1 = (event) => {
@@ -43,9 +45,9 @@ const Captcha = () => {
   }, [dispatch]);
 
   const generateCSV = async () => {
+    setClicked(true);
     const data = [...mouseMovements];
     console.log('Sending data to server:', data);
-  
     try {
         const response = await fetch('http://localhost:3000/save-csv', {
             method: 'POST',
@@ -66,6 +68,7 @@ const Captcha = () => {
               let str='';
               str+=String(data[1])
               dispatch(setResult(str));
+              console.log('Result:', str);
               
             } catch (error) {
               console.error('Error fetching result:', error);
@@ -92,7 +95,7 @@ const Captcha = () => {
       <div className='w-[100%] text-5xl text-white absolute mt-10 font-bold'>
         <Header content={"click the button"} />
       </div>
-      <div className='clickbtn absolute' onClick={generateCSV} >
+      <div className={`clickbtn absolute ${click ? "hidden" : ""}`} onClick={generateCSV}>
         <Button content={"Click Me !!!"}/>
       </div>
     </div>
