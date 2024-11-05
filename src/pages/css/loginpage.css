@@ -28,7 +28,7 @@
 }
 
 .loginForm{
-    animation: animateBtn ease 5s;
+    animation: animateBtn ease 1s;
 }
 
 @keyframes animateBtn {

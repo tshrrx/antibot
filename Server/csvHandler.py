@@ -1,5 +1,4 @@
 import torch
-import scipy as stats
 import torch.nn as nn
 import torch.nn.functional as F
 import pandas as pd
@@ -80,9 +79,9 @@ class LSTMModel(nn.Module):
 # Instantiate the model
 model = LSTMModel()
 
-model.load_state_dict(torch.load("F:/BTP/antibot/Server/mlModel/model_weights.unknown"))
+model.load_state_dict(torch.load("/kaggle/working/model_weights"))
 #Put model weight path here
-npArr = getNumpy("F:/BTP/antibot/Server/captcha/mouse_data.csv")
+npArr = getNumpy("/kaggle/input/sapimouse/sapimouse/user1/session_2020_05_14_1min.csv")
 #Put input file path here
 tensorArr = torch.tensor(npArr, dtype=torch.float32)
 tensorLabels = torch.tensor(np.zeros((npArr.shape[0], 1)), dtype = torch.float32)
@@ -101,13 +100,7 @@ with torch.no_grad():  # Disable gradient computation
         outputs = model(inputs)
         predicted = (outputs >= 0.5)  # Convert sigmoid output to binary predictions
         for i in range(predicted.shape[0]):
-            labelArray.append(1-int(predicted[i, 0]))
-            
-resultArr=np.array(labelArray)
-mode_result = stats.mode(resultArr)
-print("Mode:", mode_result.mode[0])
-result=int(mode_result.mode[0])
-
+            labelArray.append(int(predicted[i, 0]))
 print(labelArray)
 labelDF = pd.DataFrame(labelArray, columns = ["label"])
-labelDF.to_csv("F:/BTP/antibot/Server/captcha/finalCsvPath.csv", index = False)
+labelDF.to_csv("/kaggle/working/finalCsvPath.csv", index = False)
