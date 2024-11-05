@@ -22,6 +22,25 @@ app.use(bodyParser.json());
 app.post('/save-csv', (req, res) => {
     let { data } = req.body;
     const fields = ['x', 'y', 'client timestamp','button','state'];
+    data = data.map(item => {
+        let button = item.button;
+        if (item.button === '0') {
+            button = 'Left';
+        } else if (item.button === '1') {
+            button = 'Right';
+        }
+        return {
+            x: item.x,
+            y: item.y,
+            timestamp: item.timestamp,
+            button: button,
+            state: item.state
+        };
+    });
+
+    for (let i = 1; i < data.length; i++) {
+        console.log(data[i].button);
+    }
     
     const csvContent = [
         fields.join(','),
