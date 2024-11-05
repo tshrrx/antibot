@@ -43,16 +43,17 @@ const Captcha = () => {
   const generateCSV = async () => {
     const data = [...mouseMovements];
     console.log('Sending data to server:', data);
-    
+  
     try {
-      console.log("kya karu mai");
-        const response = await fetch('http://localhost:3001/save-csv', {
+        const response = await fetch('http://localhost:3000/save-csv', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({ data }),
         });
+
+        console.log('Response:', response);
   
         if (response.ok) {
             console.log('File saved successfully');
