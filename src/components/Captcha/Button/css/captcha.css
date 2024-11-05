@@ -1,5 +1,5 @@
 .clickbtn{
-    animation: animateBtn ease 5s;
+    animation: animateBtn ease 3s;
 }
 
 @keyframes animateBtn {
