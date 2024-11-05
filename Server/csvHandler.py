@@ -104,4 +104,4 @@ with torch.no_grad():  # Disable gradient computation
 print(labelArray)
 
 labelDF = pd.DataFrame(labelArray, columns = ["label"])
-labelDF.to_csv("./result.csv", index = False)
+labelDF.to_csv("./result.txt", index = False)

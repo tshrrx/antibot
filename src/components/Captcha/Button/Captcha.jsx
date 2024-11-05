@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addClick, addMouseMovement, setFlag } from '../../../redux/slices/captchaSlice';
 import Header from '../../Login/Header';
 import Button from './Button';
+import {setResult} from '../../../redux/slices/captchaSlice';
 import './css/captcha.css';
 
 const Captcha = () => {
   const flag = useSelector(state => state.captcha.flag);
   var mouseMovements = useSelector(state => state.captcha.mouseMovements);
   const dispatch = useDispatch();
+  const result = useSelector(state => state.captcha.result);
 
   useEffect(() => {
     const handleMouseMove1 = (event) => {
@@ -56,7 +58,21 @@ const Captcha = () => {
         console.log('Response:', response);
   
         if (response.ok) {
-            console.log('File saved successfully');
+          const fetchResult = async () => {
+            try {
+              const response = await fetch('http://localhost:3000/read-result');
+              const tempData = await response.text();
+              const data=tempData.split('\n')
+              let str='';
+              str+=String(data[1])
+              dispatch(setResult(str));
+              
+            } catch (error) {
+              console.error('Error fetching result:', error);
+            }
+          };
+      
+          fetchResult();
         } else {
             console.error('Error saving file:', response.statusText);
         }

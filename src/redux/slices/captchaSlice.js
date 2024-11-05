@@ -5,6 +5,7 @@ const initialState = {
     clicks: [],
     mouseButtonEvents: [],
     flag: false,
+    result: '', 
 };
 
 const captchaSlice = createSlice({
@@ -23,8 +24,11 @@ const captchaSlice = createSlice({
         addMouseButtonEvent(state, action) {
             state.mouseButtonEvents.push(action.payload);
         },
+        setResult(state, action) {
+            state.result = action.payload;
+        }
     },
 });
 
-export const { setFlag, addMouseMovement, addClick, addMouseButtonEvent } = captchaSlice.actions;
+export const { setFlag, addMouseMovement, addClick, addMouseButtonEvent,setResult } = captchaSlice.actions;
 export default captchaSlice.reducer;
