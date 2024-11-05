@@ -79,9 +79,9 @@ class LSTMModel(nn.Module):
 # Instantiate the model
 model = LSTMModel()
 
-model.load_state_dict(torch.load("/kaggle/working/model_weights"))
+model.load_state_dict(torch.load("./model_weights.unknown"))
 #Put model weight path here
-npArr = getNumpy("/kaggle/input/sapimouse/sapimouse/user1/session_2020_05_14_1min.csv")
+npArr = getNumpy("./captcha/mouse_data.csv")
 #Put input file path here
 tensorArr = torch.tensor(npArr, dtype=torch.float32)
 tensorLabels = torch.tensor(np.zeros((npArr.shape[0], 1)), dtype = torch.float32)
@@ -103,4 +103,4 @@ with torch.no_grad():  # Disable gradient computation
             labelArray.append(int(predicted[i, 0]))
 print(labelArray)
 labelDF = pd.DataFrame(labelArray, columns = ["label"])
-labelDF.to_csv("/kaggle/working/finalCsvPath.csv", index = False)
+labelDF.to_csv("./result.csv", index = False)

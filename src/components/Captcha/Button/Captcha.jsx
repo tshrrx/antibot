@@ -1,6 +1,8 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addClick, addMouseMovement, setFlag } from '../../../redux/slices/captchaSlice';
+import { addMouseMovement } from '../../../redux/slices/captchaSlice';
 import Header from '../../Login/Header';
 import Button from './Button';
 import './css/captcha.css';
@@ -45,7 +47,7 @@ const Captcha = () => {
     console.log('Sending data to server:', data);
   
     try {
-        const response = await fetch('http://localhost:3000/save-csv', {
+        const response = await fetch('http://localhost:3001/save-csv', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
