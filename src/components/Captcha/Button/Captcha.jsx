@@ -1,74 +1,73 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addClick, addMouseMovement } from '../../../redux/slices/captchaSlice';
+import { addClick, addMouseMovement, setFlag } from '../../../redux/slices/captchaSlice';
 import Header from '../../Login/Header';
 import Button from './Button';
 import './css/captcha.css';
 
 const Captcha = () => {
-  const flag=useSelector(state=>state.captcha.flag);
-  const mouseMovements=useSelector(state=>state.captcha.mouseMovements);
-  const clicks=useSelector(state=>state.captcha.clicks);
-  const dispatch=useDispatch(); 
+  const flag = useSelector(state => state.captcha.flag);
+  var mouseMovements = useSelector(state => state.captcha.mouseMovements);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        const handleMouseMove = (event) => {
-            const { clientX, clientY } = event;
-            const timestamp = Date.now();
-            dispatch(addMouseMovement({ x: clientX, y: clientY, timestamp }));
-        };
+  useEffect(() => {
+    const handleMouseMove1 = (event) => {
+      const { clientX, clientY } = event;
+      const timestamp = Date.now();
+      dispatch(addMouseMovement({ x: clientX, y: clientY, timestamp, button: 'NoButton', state: 'Move' }));
+    };
 
-        const handleMouseClick=(event)=>{
-          const { clientX, clientY } = event;
-          const timestamp = Date.now();
-          dispatch(addClick({ x: clientX, y: clientY, timestamp }));
+    const handleMouseMove2 = (event) => {
+      const { clientX, clientY, button } = event;
+      const timestamp = Date.now();
+      dispatch(addMouseMovement({ x: clientX, y: clientY, timestamp, button, state: 'Pressed' }));
+    };
+
+    const handleMouseMove3 = (event) => {
+      const { clientX, clientY, button } = event;
+      const timestamp = Date.now();
+      dispatch(addMouseMovement({ x: clientX, y: clientY, timestamp, button, state: 'Released' }));
+    };
+
+    window.addEventListener('mousemove', handleMouseMove1);
+    window.addEventListener('mousedown', handleMouseMove2);
+    window.addEventListener('mouseup', handleMouseMove3);
+    
+    return () => {
+      window.addEventListener('mousemove', handleMouseMove1);
+      window.addEventListener('mousedown', handleMouseMove2);
+      window.addEventListener('mouseup', handleMouseMove3);
+    };
+  }, [dispatch]);
+
+  const generateCSV = async () => {
+    const data = [...mouseMovements];
+    console.log('Sending data to server:', data);
+    
+    try {
+      console.log("kya karu mai");
+        const response = await fetch('http://localhost:3001/save-csv', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ data }),
+        });
+  
+        if (response.ok) {
+            console.log('File saved successfully');
+        } else {
+            console.error('Error saving file:', response.statusText);
         }
-
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('click', handleMouseClick);
-        return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-        };
-    }, [dispatch]);
-
-  // Send data to ML API
-  // const sendDataToAPI = async () => {
-  //   const apiEndpoint = 'https://your-ml-api-endpoint.com/analyze'; // Replace with your API endpoint
-
-  //   const dataPayload = {
-  //     mouseMovements: mouseMovements.current,
-  //     clickPositions: clickPositions.current,
-  //   };
-
-  //   try {
-  //     const response = await fetch(apiEndpoint, {
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(dataPayload),
-  //     });
-
-  //     if (response.ok) {
-  //       const result = await response.json();
-  //       console.log('ML API Response:', result);
-  //     } else {
-  //       console.error('API Error:', response.statusText);
-  //     }
-  //   } catch (error) {
-  //     console.error('Request Failed:', error);
-  //   }
-  // };
+    } catch (error) {
+        console.error('Error:', error);
+    }
+  };
 
   const handleClick = () => {
-    console.log("Mouse Movements:", mouseMovements.current);
-    // eslint-disable-next-line no-undef
-    console.log("Mouse Clicks:", clickPositions.current);
+    console.log("Mouse Movements:", mouseMovements);
+    console.log("Mouse Clicks:", clicks);
     // sendDataToAPI();
-    mouseMovements.current = [];
-    // eslint-disable-next-line no-undef
-    clickPositions.current = [];
   };
 
   return (
@@ -76,11 +75,9 @@ const Captcha = () => {
       <div className='w-[100%] text-5xl text-white absolute mt-10 font-bold'>
         <Header content={"click the button"} />
       </div>
-      <div className='clickbtn absolute'>
-        <Button content={"Click Me !!!"} onClick={handleClick} />
+      <div className='clickbtn absolute' onClick={generateCSV} >
+        <Button content={"Click Me !!!"}/>
       </div>
-      {console.log(mouseMovements)}
-      {console.log("clicks",clicks) }
     </div>
   );
 };

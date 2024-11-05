@@ -11,7 +11,8 @@ const Button = (props) => {
     const pos=useRef(mar)
 
   return (
-    <div onClick={()=>{dispatch(setFlag(true))}} className={`ml-[${pos.current}vh] mt-[${pos.current}vh]`}> 
+    // <div onClick={()=>{dispatch(setFlag(true))}} className={`ml-[${pos.current}vh] mt-[${pos.current}vh]`}> 
+    <div className={`ml-[${pos.current}vh] mt-[${pos.current}vh]`}> 
       <button className="btn">
           <span className="glow"></span>
           <span className="btn-content">{props.content}</span>
