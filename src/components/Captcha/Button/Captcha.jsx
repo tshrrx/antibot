@@ -50,7 +50,7 @@ const Captcha = () => {
     const data = [...mouseMovements];
     console.log('Sending data to server:', data);
     try {
-        const response = await fetch('http://localhost:3001/save-csv', {
+        const response = await fetch('http://localhost:3000/save-csv', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

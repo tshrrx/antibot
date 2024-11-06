@@ -102,5 +102,6 @@ with torch.no_grad():  # Disable gradient computation
         for i in range(predicted.shape[0]):
             labelArray.append(int(predicted[i, 0]))
 print(labelArray)
+
 labelDF = pd.DataFrame(labelArray, columns = ["label"])
-labelDF.to_csv("./result.csv", index = False)
+labelDF.to_csv("./result.txt", index = False)

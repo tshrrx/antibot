@@ -1,8 +1,8 @@
-import React from 'react'
-import '../../Login/css/button.css'
-import { useSelector,useDispatch } from 'react-redux';
-import { useRef } from 'react';
+/* eslint-disable no-unused-vars */
+import React, { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { setFlag } from '../../../redux/slices/captchaSlice';
+import '../../Login/css/button.css';
 
 const Button = (props) => {
   const flag=useSelector(state=>state.captcha.flag);
