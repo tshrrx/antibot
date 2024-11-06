@@ -1,8 +1,8 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addMouseMovement } from '../../../redux/slices/captchaSlice';
+import { addMouseMovement, setResult } from '../../../redux/slices/captchaSlice';
 import Header from '../../Login/Header';
 import Button from './Button';
 import './css/captcha.css';
@@ -11,6 +11,9 @@ const Captcha = () => {
   const flag = useSelector(state => state.captcha.flag);
   var mouseMovements = useSelector(state => state.captcha.mouseMovements);
   const dispatch = useDispatch();
+  const result = useSelector(state => state.captcha.result);
+
+  const [click,setClicked]=useState(false);
 
   useEffect(() => {
     const handleMouseMove1 = (event) => {
@@ -43,9 +46,9 @@ const Captcha = () => {
   }, [dispatch]);
 
   const generateCSV = async () => {
+    setClicked(true);
     const data = [...mouseMovements];
     console.log('Sending data to server:', data);
-  
     try {
         const response = await fetch('http://localhost:3001/save-csv', {
             method: 'POST',
@@ -58,7 +61,22 @@ const Captcha = () => {
         console.log('Response:', response);
   
         if (response.ok) {
-            console.log('File saved successfully');
+          const fetchResult = async () => {
+            try {
+              const response = await fetch('http://localhost:3000/read-result');
+              const tempData = await response.text();
+              const data=tempData.split('\n')
+              let str='';
+              str+=String(data[1])
+              dispatch(setResult(str));
+              console.log('Result:', str);
+              
+            } catch (error) {
+              console.error('Error fetching result:', error);
+            }
+          };
+      
+          fetchResult();
         } else {
             console.error('Error saving file:', response.statusText);
         }
@@ -78,7 +96,7 @@ const Captcha = () => {
       <div className='w-[100%] text-5xl text-white absolute mt-10 font-bold'>
         <Header content={"click the button"} />
       </div>
-      <div className='clickbtn absolute' onClick={generateCSV} >
+      <div className={`clickbtn absolute ${click ? "hidden" : ""}`} onClick={generateCSV}>
         <Button content={"Click Me !!!"}/>
       </div>
     </div>

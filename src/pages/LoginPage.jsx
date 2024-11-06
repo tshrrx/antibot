@@ -21,7 +21,7 @@ const LoginPage = () => {
     formState: { errors, isSubmitting },
   } = useForm();
   const [input, setInput] = useState({ email: "", password: "" });
-  const flag = useSelector((state) => state.captcha.flag);
+  const result = useSelector((state) => state.captcha.result);
   const [nav,setNav]=useState(false)
   const dispatch = useDispatch();
 
@@ -49,7 +49,7 @@ const LoginPage = () => {
   return (
     <div className="Page">
         <ParticleBackground />
-        {(flag)?
+        {(result)?
         <div className="w-[100vw] h-[100vh] flex justify-center items-center">
             <div className="border-2  rounded-xl border-[#D1D5DB] p-20 bg-[#d1d5db28]">
             <div className="mb-[10vh]">

@@ -40,23 +40,33 @@ app.post('/save-csv', (req, res) => {
             return res.status(500).send('Internal Server Error');
         }
 
-        // Write the CSV file
         fs.writeFile(filePath, csvContent, (err) => {
             if (err) {
                 console.error('Error writing file:', err);
                 return res.status(500).send('Internal Server Error');
             }
-            console.log('ruko jara');
-            // Call the Python script
+
             exec(`python csvHandler.py ${filePath}`, (error, stdout, stderr) => {
                 if (error) {
                     console.error(`Error executing Python script: ${error.message}`);
-                    return res.status(505).send('Internal ka ma bhen Server Error');
+                    return res.status(500).send('Internal Server Error');
                 }
 
                 res.send('File saved and processed successfully');
             });
         });
+    });
+});
+
+app.get('/read-result', (req, res) => {
+    const resultFilePath = path.join(dirPath, 'result.txt');
+
+    fs.readFile(resultFilePath, 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading file:', err);
+            return res.status(500).send('Internal Server Error');
+        }
+        res.send(data);
     });
 });
 
